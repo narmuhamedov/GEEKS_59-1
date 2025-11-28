@@ -1,5 +1,48 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from blog.models import NewsPost
+
+#Detail
+
+def newsPostDetailView(request, id):
+    if request.method == "GET":
+        news_id = get_object_or_404(NewsPost, id=id)
+        return render(
+            request,
+            'blog/news_detail.html',
+            {
+                'news_id': news_id,
+            }
+        )
+
+
+
+
+
+
+#List
+def newsPostView(request):
+    if request.method == 'GET':
+        #query запрос
+        news = NewsPost.objects.all().order_by('-id')
+        return render(
+            request,
+            'blog/news_list.html',
+            {
+                'news_blog': news,
+            }
+        )
+
+
+
+
+
+
+
+
+
+
+
 
 #HttpResponse - модуль который отвечает за вывод одиночного сообщения
 

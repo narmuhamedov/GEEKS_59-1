@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>{{ news_id.title }}</h1>
+    <img src="{{ news_id.photo.url }}" alt="" width="300" height="400">
+    <img src="{{ news_id.photo2.url }}" alt="" width="300" height="400">
+    <p>{{ news_id.descpition }}</p>
+    <p>{{ news_id.category_news }}</p>
+    <iframe src="{{ news_id.url_news }}"  width="300" height="400"></iframe>
+    <data>{{news_id.created_at }}</data> 
+
+</body>
+</html>

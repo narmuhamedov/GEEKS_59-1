@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Список новостей</h1>
+
+    <ul>
+        <!-- Вставить цикл с ключом сюда -->
+         {%  for i in news_blog  %}
+        <li>
+            <!-- Вставить данные переменных сюда -->
+            <h3>{{ i.title }}</h3>
+            <img src="{{ i.photo.url }}" alt="" width="300" height="400">
+            <br>
+            <data>{{ i.created_at }}</data>
+            <br>
+            <button><a href="/news_list/{{ i.id }}/">Читать далее</a></button>
+        </li>
+        {% endfor  %}
+        <!-- Закрыть цикл -->
+    </ul>
+
+
+</body>
+</html>
