@@ -42,3 +42,34 @@ class NewsPost(models.Model):
     def __str__(self):
         return f'{self.title}:{self.created_at}'
 
+#Один ко многим
+class Reviews(models.Model):
+    choice_post = models.ForeignKey(NewsPost, on_delete=models.CASCADE,  
+                                    related_name='review')
+    MARKS = (
+        ('❤️', '❤️'),
+        ('❤️❤️', '❤️❤️'),
+        ('❤️❤️❤️', '❤️❤️❤️'),
+        ('❤️❤️❤️❤️', '❤️❤️❤️❤️'),
+        ('❤️❤️❤️❤️❤️', '❤️❤️❤️❤️❤️'),
+    )
+    marks = models.CharField(max_length=100, choices=MARKS, default='❤️❤️❤️❤️')
+    text = models.TextField(verbose_name='Напишите отзыв')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.choice_post}-{self.marks}'
+
+
+
+
+
+
+class Slider(models.Model):
+    image = models.URLField(verbose_name='вставьте ссылки с картинок GOOGLE')
+
+
+    class Meta:
+        verbose_name = 'картинку'
+        verbose_name_plural = 'картинки'
+        

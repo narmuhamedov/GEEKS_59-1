@@ -1,19 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% load static %}
+{% include '../header.html' %}
 
-    <h1>{{ news_id.title }}</h1>
-    <img src="{{ news_id.photo.url }}" alt="" width="300" height="400">
-    <img src="{{ news_id.photo2.url }}" alt="" width="300" height="400">
-    <p>{{ news_id.descpition }}</p>
-    <p>{{ news_id.category_news }}</p>
-    <iframe src="{{ news_id.url_news }}"  width="300" height="400"></iframe>
-    <data>{{news_id.created_at }}</data> 
+   <div class="news-detail">
 
-</body>
-</html>
+    <h1 class="news-title">{{ news_id.title }}</h1>
+
+    <div class="news-media">
+        {% if news_id.photo %}
+        <img src="{{ news_id.photo.url }}" alt="{{ news_id.title }}">
+        {% endif %}
+
+        {% if news_id.photo2 %}
+        <img src="{{ news_id.photo2.url }}" alt="{{ news_id.title }}">
+        {% endif %}
+
+        {% if news_id.url_news %}
+        <iframe src="{{ news_id.url_news }}"></iframe>
+        {% endif %}
+    </div>
+
+    <p class="news-description">{{ news_id.descpition }}</p>
+    <p class="news-category">Категория: {{ news_id.category_news }}</p>
+
+    <data class="news-date">{{ news_id.created_at }}</data>
+
+</div>
+
+<!-- Comments -->
+<div class="comments">
+  <h3 class="comments-title">Отзывы</h3>
+  {% for i in news_id.review.all %}
+  <ul>
+    <li>
+      <p class="rating">Оценка: 
+        <span class="stars" aria-hidden="true">
+          <span class="star filled">{{ i.marks }}</span>
+        </span>
+      </p>
+
+      <p class="review">Отзыв: {{ i.text }}</p>
+
+      <p class="date">Дата: {{ i.created_at }}</p>
+    </li>
+
+  </ul>
+  {% endfor %}
+</div>
+
+
+
+{% include '../footer.html' %}

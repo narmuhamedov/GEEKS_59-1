@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from blog.models import NewsPost
+from blog.models import NewsPost, Slider
 
 #Detail
 
@@ -25,11 +25,13 @@ def newsPostView(request):
     if request.method == 'GET':
         #query запрос
         news = NewsPost.objects.all().order_by('-id')
+        slider = Slider.objects.all().order_by('-id')
         return render(
             request,
             'blog/news_list.html',
             {
                 'news_blog': news,
+                'slider': slider
             }
         )
 
