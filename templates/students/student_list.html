@@ -1,0 +1,21 @@
+{% load static %}
+{% include '../header.html' %}
+
+
+   <h1>Список студентов</h1>
+
+<ul class="news-list">
+    {% for i in student %}
+    <li class="news-card">
+        <h3>{{ i.name }}</h3>
+        <p>Направление: {{ i.directions }}</p>
+        <data>{{ i.created_at }}</data>
+        <br>
+        <button><a href="/student_list/{{ i.id }}/">Читать далее</a></button>
+        <button><a href="/student_list/{{ i.id }}/update/">Изменить данные</a></button>
+        <button><a href="/student_list/{{ i.id }}/delete/">Удалить данные</a></button>
+    </li>
+    {% endfor %}
+</ul>
+
+{% include '../footer.html' %}

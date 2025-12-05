@@ -1,0 +1,25 @@
+{% load static %}
+{% include '../header.html' %}
+
+   <div class="news-detail">
+
+    <h1 class="news-title">Имя:{{ student_id.name }}</h1>
+
+    <div class="news-media">
+        {% if student_id.third_name %}
+        <p>Отчество: {{ student_id.third_name }}</p>
+        {% endif %}
+    </div>
+
+    <p class="news-description">Возраст:{{student_id.age }}</p>
+    <a href="{{ student_id.certificate }}" download  class="news-description">Скачать сертификат</p>
+    <a href="{{ student_id.ORT_test }}" class="news-category">ОРТ: {{ student_id.ORT_test }}</p>
+    <p class="news-category">Направление: {{ student_id.directions }}</p>
+
+    <data class="news-date">{{ student_id.created_at }}</data>
+    <data class="news-date">{{ student_id.updated_at }}</data>
+
+</div>
+
+
+{% include '../footer.html' %}

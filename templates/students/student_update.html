@@ -1,0 +1,21 @@
+{% load static %}
+{% include '../header.html' %}
+
+<h1>Обновление студента</h1>
+
+<form  method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Отправить</button>
+    <button type="reset">Очистить</button>
+
+
+</form>
+
+
+
+
+
+{% include '../footer.html' %}

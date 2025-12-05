@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #как только создали новый startapp сразу же добавляете его сюда
     'blog',
+    'students_geeks',
 ]
 
 MIDDLEWARE = [
