@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     #как только создали новый startapp сразу же добавляете его сюда
     'blog',
     'students_geeks',
+    'users',
 ]
 
 MIDDLEWARE = [
