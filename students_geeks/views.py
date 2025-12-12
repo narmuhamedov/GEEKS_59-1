@@ -4,6 +4,27 @@ from students_geeks.forms import StudentForm
 from django.http import HttpResponse
 
 
+
+#search
+def searchStudent(request):
+    query = request.GET.get('s', '')
+    if query:
+        student = Student.objects.filter(name__icontains=query)
+    else:
+        student = Student.objects.none
+    return render(
+        request,
+        'students/student_list.html',
+        {
+            'student': student,
+            's': query
+        }
+    )
+
+
+
+
+
 #CRUD - CREATE READ UPDATE DELETE
 
 

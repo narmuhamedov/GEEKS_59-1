@@ -1,0 +1,32 @@
+{% load static %}
+{% include '../header.html' %}
+
+
+   <h1>Список всех продуктов cвязанные с "Едой"</h1>
+
+  
+
+<ul class="news-list">
+    {% for i in prod %}
+    <li class="news-card">
+        <h3>{{ i.title }}</h3>
+        <p>{{ i.description  }}</p>
+        {% for j in i.categories.all %}
+        <h4>Категории</h4>
+        <p>
+            {{  j.name }}
+        </p>
+        {% endfor %}
+        
+        <data>{{ i.created_at }}</data>
+        <br>
+    </li>
+    {% endfor %}
+</ul>
+
+
+
+
+
+
+{% include '../footer.html' %}

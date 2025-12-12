@@ -3,6 +3,16 @@
 
 
    <h1>Список студентов</h1>
+<center>
+<form method="GET" action="{% url 'search' %}">
+    <input type="text" type="search" name="s">
+    <button type="submit">Поиск</button>
+</form>
+<br>
+<button><a href="{% url 'create_student' %}">Добавить студента</a></button>
+
+</center>
+<br>
 
 <ul class="news-list">
     {% for i in student %}

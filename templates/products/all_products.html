@@ -1,0 +1,76 @@
+{% load static %}
+{% include '../header.html' %}
+
+
+   <h1>Список всех продуктов</h1>
+
+   <a href="{% url 'meals_products' %}">Еда</a>
+   <a href="{% url 'drinks_products' %}">Напитки</a>
+
+<ul class="news-list">
+    {% for i in prod %}
+    <li class="news-card">
+        <h3>{{ i.title }}</h3>
+        <p>{{ i.description  }}</p>
+        {% for j in i.categories.all %}
+        <h4>Категории</h4>
+        <p>
+            {{  j.name }}
+        </p>
+        {% endfor %}
+        
+        <data>{{ i.created_at }}</data>
+        <br>
+    </li>
+    {% endfor %}
+</ul>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if prod.has_previous %}
+            <a href="?page=1">&laquo; первая</a>
+            <a href="?page={{ prod.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ prod.number }} из {{ prod.paginator.num_pages }}
+        </span>
+
+        {% if prod.has_next %}
+            <a href="?page={{ prod.next_page_number }}">следующая</a>
+            <a href="?page={{ prod.paginator.num_pages }}">последняя &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+<style>
+    .pagination {
+        margin-top: 30px;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .step-links a {
+        color: #007bff;
+        text-decoration: none;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+    
+    .step-links a:hover {
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+    }
+    
+    .current {
+        padding: 5px 10px;
+        margin: 0 5px;
+        font-weight: bold;
+    }
+</style>
+
+
+{% include '../footer.html' %}
