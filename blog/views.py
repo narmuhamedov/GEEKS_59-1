@@ -1,19 +1,36 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from blog.models import NewsPost, Slider
+from django.views import generic
+
+
+
 
 #Detail
 
-def newsPostDetailView(request, id):
-    if request.method == "GET":
-        news_id = get_object_or_404(NewsPost, id=id)
-        return render(
-            request,
-            'blog/news_detail.html',
-            {
-                'news_id': news_id,
-            }
-        )
+class NewsPostDetailView(generic.DetailView):
+    template_name = 'blog/news_detail.html'
+    model = NewsPost
+    context_object_name = 'news_id'
+
+    def get_object(self, **kwargs):
+        news_id = self.kwargs.get("id")
+        return get_object_or_404(self.model, id=news_id)
+        
+    
+
+
+
+# def newsPostDetailView(request, id):
+#     if request.method == "GET":
+#         news_id = get_object_or_404(NewsPost, id=id)
+#         return render(
+#             request,
+#             'blog/news_detail.html',
+#             {
+#                 'news_id': news_id,
+#             }
+#         )
 
 
 
@@ -21,19 +38,39 @@ def newsPostDetailView(request, id):
 
 
 #List
-def newsPostView(request):
-    if request.method == 'GET':
-        #query запрос
-        news = NewsPost.objects.all().order_by('-id')
-        slider = Slider.objects.all().order_by('-id')
-        return render(
-            request,
-            'blog/news_list.html',
-            {
-                'news_blog': news,
-                'slider': slider
-            }
-        )
+
+class NewsPostView(generic.ListView):
+    template_name = 'blog/news_list.html'
+    model = NewsPost
+    context_object_name = 'news_blog'
+    ordering = ["-id"]
+
+    def get_context_data(self, **kwargs):
+        # Получаем существующий контекст
+        context = super().get_context_data(**kwargs)
+        # Добавляем дополнительные данные
+        context['slider'] = Slider.objects.all().order_by('-id')
+        return context
+ 
+
+
+
+
+
+
+# def newsPostView(request):
+#     if request.method == 'GET':
+#         #query запрос
+#         news = NewsPost.objects.all().order_by('-id')
+#         slider = Slider.objects.all().order_by('-id')
+#         return render(
+#             request,
+#             'blog/news_list.html',
+#             {
+#                 'news_blog': news,
+#                 'slider': slider
+#             }
+#         )
 
 
 

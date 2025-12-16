@@ -1,6 +1,15 @@
 from django import forms
 from users.models import CustomUser
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+from captcha.fields import CaptchaField
+
+
+class LoginCaptchaInput(AuthenticationForm):
+    captcha = CaptchaField()
+
+
+
 
 
 
